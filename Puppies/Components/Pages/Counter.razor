@@ -1,13 +1,24 @@
 ﻿@page "/counter"
 @rendermode InteractiveServer
 
-<PageTitle>Counter</PageTitle>
+<PageTitle>Puppy Profile</PageTitle>
 
-<h1>Counter</h1>
-
+<h1>Profile</h1>
+<h2>Tasks</h2>
+<table class="todo_list">
+    <tr><th>To Do</th><th>Doing</th><th>Done</th></tr>
+    <tr><td></td><td></td><td>Add Test Project</td></tr>
+    <tr><td></td><td></td><td>Add One Puppy</td></tr>
+    <tr><td></td><td>Add Click</td><td></td></tr>
+    <tr><td>Add Display</td><td></td><td></td></tr>
+    <tr><td>Iterate Puppies</td><td></td><td></td></tr>
+    <tr><td>Add DB</td><td></td><td></td></tr>
+</table>
 <p role="status">Current count: @currentCount</p>
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+
 
 @code {
     private int currentCount = 0;
