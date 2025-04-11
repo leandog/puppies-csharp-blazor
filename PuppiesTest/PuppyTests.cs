@@ -1,4 +1,4 @@
-namespace TestProject1;
+namespace PuppiesTest;
 
 public class Tests
 {
