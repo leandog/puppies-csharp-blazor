@@ -85,6 +85,7 @@ jobs:
         dotnet-version: [ 8.0.x ]
     runs-on: ${{ matrix.os }}
     name: Package
+    if: github.ref == 'refs/heads/main'
     
     needs: acceptance_test
     
@@ -97,5 +98,6 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: build-${{ matrix.os }}-${{ matrix.dotnet-version }}.tar.gz
+          tag: ${{ github.head_ref }}.${{ github.sha }}
           draft: true
           
