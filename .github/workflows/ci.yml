@@ -38,19 +38,42 @@ jobs:
         results-path: ./PuppiesTest/TestResults/*.trx
         coverage-path: ./PuppiesTest/TestResults/coverage.xml
         coverage-threshold: 0
+    - name: Tar Build
+      run: tar -cvf build-${{ matrix.os }}-${{ matrix.dotnet-version }}.tar.gz Puppies/bin/Release/net8.0/publish        
+    - name: Upload Build Artifact
+      uses: actions/upload-artifact@v4
+      with:
+          name: build-${{ matrix.os }}-${{ matrix.dotnet-version }}
+          path: build-${{ matrix.os }}-${{ matrix.dotnet-version }}.tar.gz
+      
+      
         
   acceptance_test:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ ubuntu-latest ]
+        dotnet-version: [ 8.0.x ]
+    runs-on: ${{ matrix.os }}
     name: Acceptance Test
 
     needs: build
 
     steps:
-      - name: TODO
-        run: echo "TODO"  
-  
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: build-${{ matrix.os }}-${{ matrix.dotnet-version }}
+      - name: Create Build Dir
+        run: mkdir build
+      - name: Expand Build Tar
+        run:  tar -xvf build-${{ matrix.os }}-${{ matrix.dotnet-version }}.tar.gz -C build
+          
   package:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ ubuntu-latest ]
+        dotnet-version: [ 8.0.x ]
+    runs-on: ${{ matrix.os }}
     name: Package
     
     needs: acceptance_test
@@ -58,3 +81,4 @@ jobs:
     steps:
       - name: TODO
         run: echo "TODO"
+          
