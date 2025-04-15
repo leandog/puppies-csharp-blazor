@@ -10,8 +10,8 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
+    name: Build and Unit Test
 
     steps:
     - uses: actions/checkout@v4
@@ -34,3 +34,13 @@ jobs:
         results-path: ./PuppiesTest/TestResults/*.trx
         coverage-path: ./PuppiesTest/TestResults/coverage.xml
         coverage-threshold: 0
+        
+  package:
+    runs-on: ubuntu-latest
+    name: Package for Manual Deployment
+    
+    needs: build
+    
+    steps:
+      - name: TODO
+          run: echo "TODO"
