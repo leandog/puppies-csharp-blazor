@@ -35,11 +35,21 @@ jobs:
         coverage-path: ./PuppiesTest/TestResults/coverage.xml
         coverage-threshold: 0
         
+  acceptance_test:
+    runs-on: ubuntu-latest
+    name: Package
+
+    needs: build
+
+    steps:
+      - name: TODO
+        run: echo "TODO"  
+  
   package:
     runs-on: ubuntu-latest
-    name: Package for Manual Deployment
+    name: Package
     
-    needs: build
+    needs: acceptance_test
     
     steps:
       - name: TODO
