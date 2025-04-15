@@ -26,6 +26,7 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal --logger trx
     - name: Dotnet Test Reporter
+      if: always()
       uses: bibipkins/dotnet-test-reporter@v1.5.3
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
