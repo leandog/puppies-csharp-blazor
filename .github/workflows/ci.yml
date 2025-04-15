@@ -37,7 +37,7 @@ jobs:
         
   acceptance_test:
     runs-on: ubuntu-latest
-    name: Package
+    name: Acceptance Test
 
     needs: build
 
