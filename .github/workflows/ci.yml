@@ -62,7 +62,6 @@ jobs:
           path: build-${{ matrix.os }}-${{ matrix.dotnet-version }}.tar.gz
       
       
-        
   acceptance_test:
     name: Acceptance Test
     needs: build
@@ -92,6 +91,7 @@ jobs:
       - name: Stop Application
         run: echo "TODO - stop app"
           
+          
   package:
     name: Package
     needs: acceptance_test
@@ -112,12 +112,13 @@ jobs:
           
       - name: Get Timestamp
         id: date
-        run: echo "::set-output name=timestamp::$(date +'%Y-%m-%d-%H-%M-%S')"
+        run: echo "::set-output name=timestamp::$(date +'%Y-%m-%d %H:%M:%S')"
         
       - name: Publish Draft Release
         uses: ncipollo/release-action@v1
         with:
           artifacts: build-${{ matrix.os }}-${{ matrix.dotnet-version }}.tar.gz
-          tag: ${{ steps.date.outputs.timestamp }}-${{ github.sha }}
+          name: ${{ steps.date.outputs.timestamp }} (${{ github.sha }}) 
+          tag: ${{ steps.date.outputs.timestamp }} - ${{ github.sha }}
           draft: true
           
