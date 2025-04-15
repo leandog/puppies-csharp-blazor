@@ -38,8 +38,10 @@ jobs:
         results-path: ./PuppiesTest/TestResults/*.trx
         coverage-path: ./PuppiesTest/TestResults/coverage.xml
         coverage-threshold: 0
+    - name: Publish build
+      run: dotnet publish Puppies --no-build -o build
     - name: Tar Build
-      run: tar -cvf build-${{ matrix.os }}-${{ matrix.dotnet-version }}.tar.gz Puppies/bin/Release/net8.0/publish        
+      run: tar -cvf build-${{ matrix.os }}-${{ matrix.dotnet-version }}.tar.gz build        
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v4
       with:
