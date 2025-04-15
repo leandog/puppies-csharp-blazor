@@ -93,10 +93,9 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build-${{ matrix.os }}-${{ matrix.dotnet-version }}
-      - name: Create Build Dir
-        run: mkdir build
-      - name: Expand Build Tar
-        run:  tar -xvf build-${{ matrix.os }}-${{ matrix.dotnet-version }}.tar.gz -C build
-      - name: Publish Release
-        run: echo "TODO - publish release"
+      - name: Publish Draft Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: build-${{ matrix.os }}-${{ matrix.dotnet-version }}.tar.gz
+          draft: true
           
