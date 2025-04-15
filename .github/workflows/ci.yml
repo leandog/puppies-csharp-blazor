@@ -1,5 +1,7 @@
 name: Puppies Continuous Integration
 
+# NOTE: The strategy.matrix section of each job MUST have the same matrix variations
+
 on:
   push:
     branches: [ "main" ]
@@ -69,6 +71,12 @@ jobs:
         run: mkdir build
       - name: Expand Build Tar
         run:  tar -xvf build-${{ matrix.os }}-${{ matrix.dotnet-version }}.tar.gz -C build
+      - name: Start Application
+        run: echo "TODO - start app"
+      - name: Run Acceptance Tests
+        run: echo "TODO - run acceptance tests"
+      - name: Stop Application
+        run: echo "TODO - stop app"
           
   package:
     strategy:
@@ -81,6 +89,14 @@ jobs:
     needs: acceptance_test
     
     steps:
-      - name: TODO
-        run: echo "TODO"
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: build-${{ matrix.os }}-${{ matrix.dotnet-version }}
+      - name: Create Build Dir
+        run: mkdir build
+      - name: Expand Build Tar
+        run:  tar -xvf build-${{ matrix.os }}-${{ matrix.dotnet-version }}.tar.gz -C build
+      - name: Publish Release
+        run: echo "TODO - publish release"
           
