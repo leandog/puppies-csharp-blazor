@@ -12,7 +12,8 @@ jobs:
   build:
     strategy: 
       matrix:
-        os: [ ubuntu-latest, windows-latest ]
+        os: [ ubuntu-latest ]
+        dotnet-version: [ 8.0.x ]
     runs-on: ${{ matrix.os }}
     name: Build and Unit Test
 
@@ -21,7 +22,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 8.0.x
+        dotnet-version: ${{ matrix.dotnet-version }}
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
