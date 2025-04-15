@@ -39,7 +39,7 @@ jobs:
         coverage-path: ./PuppiesTest/TestResults/coverage.xml
         coverage-threshold: 0
     - name: Publish build
-      run: dotnet publish Puppies --no-build -o build
+      run: dotnet publish Puppies -o build
     - name: Tar Build
       run: tar -cvf build-${{ matrix.os }}-${{ matrix.dotnet-version }}.tar.gz build        
     - name: Upload Build Artifact
