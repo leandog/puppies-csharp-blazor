@@ -12,25 +12,33 @@ on:
 
 jobs:
   build:
+    name: Build and Unit Test
+
     strategy: 
       matrix:
         os: [ ubuntu-latest ]
         dotnet-version: [ 8.0.x ]
+
     runs-on: ${{ matrix.os }}
-    name: Build and Unit Test
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout 
+      uses: actions/checkout@v4
+      
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: ${{ matrix.dotnet-version }}
+        
     - name: Restore dependencies
       run: dotnet restore
+      
     - name: Build
       run: dotnet build --no-restore
+      
     - name: Test
       run: dotnet test --no-build --verbosity normal --logger trx
+      
     - name: Dotnet Test Reporter
       if: always()
       uses: bibipkins/dotnet-test-reporter@v1.5.3
@@ -40,10 +48,13 @@ jobs:
         results-path: ./PuppiesTest/TestResults/*.trx
         coverage-path: ./PuppiesTest/TestResults/coverage.xml
         coverage-threshold: 0
+        
     - name: Publish build
       run: dotnet publish Puppies -o build
+      
     - name: Tar Build
-      run: tar -cvf build-${{ matrix.os }}-${{ matrix.dotnet-version }}.tar.gz build        
+      run: tar -cvf build-${{ matrix.os }}-${{ matrix.dotnet-version }}.tar.gz build
+      
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v4
       with:
@@ -53,42 +64,46 @@ jobs:
       
         
   acceptance_test:
+    name: Acceptance Test
+    needs: build
+
     strategy:
       matrix:
         os: [ ubuntu-latest ]
         dotnet-version: [ 8.0.x ]
-    runs-on: ${{ matrix.os }}
-    name: Acceptance Test
 
-    needs: build
+    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Download Build Artifact
         uses: actions/download-artifact@v4
         with:
           name: build-${{ matrix.os }}-${{ matrix.dotnet-version }}
-      - name: Create Build Dir
-        run: mkdir build
+          
       - name: Expand Build Tar
-        run:  tar -xvf build-${{ matrix.os }}-${{ matrix.dotnet-version }}.tar.gz -C build
+        run:  tar -xvf build-${{ matrix.os }}-${{ matrix.dotnet-version }}.tar.gz
+        
       - name: Start Application
         run: echo "TODO - start app"
+        
       - name: Run Acceptance Tests
         run: echo "TODO - run acceptance tests"
+        
       - name: Stop Application
         run: echo "TODO - stop app"
           
   package:
+    name: Package
+    needs: acceptance_test
+    if: github.ref == 'refs/heads/main'
+
     strategy:
       matrix:
         os: [ ubuntu-latest ]
         dotnet-version: [ 8.0.x ]
+
     runs-on: ${{ matrix.os }}
-    name: Package
-    if: github.ref == 'refs/heads/main'
-    
-    needs: acceptance_test
-    
+        
     steps:
       - name: Download Build Artifact
         uses: actions/download-artifact@v4
