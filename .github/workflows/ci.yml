@@ -10,8 +10,9 @@ on:
 
 jobs:
   build:
-    matrix:
-      os: [ ubuntu-latest ]
+    strategy: 
+      matrix:
+        os: [ ubuntu-latest ]
     runs-on: ${{ matrix.os }}
     name: Build and Unit Test
 
