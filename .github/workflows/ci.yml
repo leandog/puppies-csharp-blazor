@@ -141,7 +141,7 @@ jobs:
           
       - name: Get Timestamp
         id: date
-        run: echo "::set-output name=timestamp::$(date +'%Y-%m-%d %H:%M:%S')"
+        run: echo "name=timestamp::$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_OUTPUT
         
       - name: Publish Draft Release
         uses: ncipollo/release-action@v1
