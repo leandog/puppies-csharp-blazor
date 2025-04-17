@@ -91,13 +91,13 @@ jobs:
           cp build/start-puppies.sh .
           cp build/stop-puppies.sh .
           ls -la
-          start-puppies.sh
+          ./start-puppies.sh
         
       - name: Run Acceptance Tests
         run: echo "TODO - run acceptance tests"
         
       - name: Stop Application
-        run: stop-puppies.sh
+        run: ./stop-puppies.sh
           
           
   package:
