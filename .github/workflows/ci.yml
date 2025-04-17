@@ -53,6 +53,7 @@ jobs:
       run: dotnet publish Puppies -o build
     - name: Move start/stop scripts into build artifact
       run: |
+        ls -la
         cp start-server.sh build
         cp stop-server.sh build
         
