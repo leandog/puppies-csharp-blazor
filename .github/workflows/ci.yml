@@ -94,13 +94,13 @@ jobs:
         run: |
           cp build/start-puppies.sh .
           cp build/stop-puppies.sh .
-          start-server.sh
+          start-puppies.sh
         
       - name: Run Acceptance Tests
         run: echo "TODO - run acceptance tests"
         
       - name: Stop Application
-        run: stop-server.sh
+        run: stop-puppies.sh
           
           
   package:
