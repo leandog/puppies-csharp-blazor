@@ -105,10 +105,11 @@ jobs:
           pip install -r requirements.txt
           playwright install
           echo "# Acceptance Test Results" >> $GITHUB_STEP_SUMMARY
-          echo " " >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
           echo "```" >> $GITHUB_STEP_SUMMARY
-          BASE_URL="http://localhost:5000" behave -f plain >> $GITHUB_STEP_SUMMARY
+          BASE_URL="http://localhost:5000" behave -f plain
           echo "```" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
         
       - name: Stop Application
         run: ./stop-puppies.sh
