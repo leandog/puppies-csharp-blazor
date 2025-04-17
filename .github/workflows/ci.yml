@@ -146,6 +146,6 @@ jobs:
           artifacts: build-${{ matrix.os }}-${{ matrix.dotnet-version }}.tar.gz
           name: ${{ matrix.os }} (${{ github.sha }}) 
           tag: ${{ matrix.os }} - ${{ github.sha }}
-          body: "# Puppies Release\n\Operating System: ${{ matrix.os }} UTC\n\nGit Hash: ${{ github.sha }}\n\nBuilt by this [GitHub Action Run](https://github.com/${{github.repository}}/actions/runs/${{github.run_id}})\n\nEnjoy!"
+          body: "# Puppies Release\n\Operating System: ${{ matrix.os }}\n\nGit Hash: ${{ github.sha }}\n\nBuilt by this [GitHub Action Run](https://github.com/${{github.repository}}/actions/runs/${{github.run_id}})\n\nEnjoy!"
           draft: true
           
