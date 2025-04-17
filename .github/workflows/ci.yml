@@ -148,8 +148,8 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: build-${{ matrix.os }}-${{ matrix.dotnet-version }}.tar.gz
-          name: ${{ steps.date.outputs.timestamp }} (${{ github.sha }}) 
-          tag: ${{ steps.date.outputs.timestamp }} - ${{ github.sha }}
-          body: "# Puppies Release\n\nTimestamp: ${{ steps.date.outputs.timestamp }} UTC\n\nGit Hash: ${{ github.sha }}\n\nBuilt by this [GitHub Action Run](https://github.com/${{github.repository}}/actions/runs/${{github.run_id}})\n\nEnjoy!"
+          name: ${{ matrix.os }} (${{ github.sha }}) 
+          tag: ${{ matrix.os }} - ${{ github.sha }}
+          body: "# Puppies Release\n\Operating System: ${{ matrix.os }} UTC\n\nGit Hash: ${{ github.sha }}\n\nBuilt by this [GitHub Action Run](https://github.com/${{github.repository}}/actions/runs/${{github.run_id}})\n\nEnjoy!"
           draft: true
           
