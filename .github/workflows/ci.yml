@@ -54,8 +54,8 @@ jobs:
     - name: Move start/stop scripts into build artifact
       run: |
         ls -la
-        cp start-server.sh build
-        cp stop-server.sh build
+        cp start-puppies.sh build
+        cp stop-puppies.sh build
         
     - name: Tar Build
       run: tar -cvf build-${{ matrix.os }}-${{ matrix.dotnet-version }}.tar.gz build
@@ -92,8 +92,8 @@ jobs:
 
       - name: Start Application
         run: |
-          cp build/start-server.sh .
-          cp build/stop-server.sh .
+          cp build/start-puppies.sh .
+          cp build/stop-puppies.sh .
           start-server.sh
         
       - name: Run Acceptance Tests
