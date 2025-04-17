@@ -259,3 +259,10 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+
+# Build directory used by dotnet publish
+build
+
+# File that stores the process id (used by start-server.sh and stop-server.sh
+PUPPIES_PID
+ 
