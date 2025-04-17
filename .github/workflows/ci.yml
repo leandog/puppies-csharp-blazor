@@ -104,7 +104,11 @@ jobs:
           source .venv/bin/activate
           pip install -r requirements.txt
           playwright install
-          BASE_URL="http://localhost:5000" behave -f behave_html_pretty_formatter:PrettyHTMLFormatter >> $GITHUB_STEP_SUMMARY
+          echo "# Acceptance Test Results" >> $GITHUB_STEP_SUMMARY
+          echo " " >> $GITHUB_STEP_SUMMARY
+          echo "```" >> $GITHUB_STEP_SUMMARY
+          BASE_URL="http://localhost:5000" behave -f plain >> $GITHUB_STEP_SUMMARY
+          echo "```" >> $GITHUB_STEP_SUMMARY
         
       - name: Stop Application
         run: ./stop-puppies.sh
