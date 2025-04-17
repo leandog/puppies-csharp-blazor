@@ -22,7 +22,7 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-    - name: Checkout 
+    - name: Checkout Puppies Repo
       uses: actions/checkout@v4
       
     - name: Setup .NET
@@ -78,6 +78,11 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
+      - name: Checkout Puppies Acceptance Test Repo
+        uses: actions/checkout@v4
+        with:
+          repository: leandog/atdd-with-puppies-python-behave
+
       - name: Download Build Artifact
         uses: actions/download-artifact@v4
         with:
