@@ -78,6 +78,11 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          
       - name: Checkout Puppies Acceptance Test Repo
         uses: actions/checkout@v4
         with:
