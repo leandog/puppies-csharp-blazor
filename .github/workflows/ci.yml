@@ -51,7 +51,11 @@ jobs:
         
     - name: Publish build
       run: dotnet publish Puppies -o build
-      
+    - name: Move start/stop scripts into build artifact
+      run: |
+        cp start-server.sh build
+        cp stop-server.sh build
+        
     - name: Tar Build
       run: tar -cvf build-${{ matrix.os }}-${{ matrix.dotnet-version }}.tar.gz build
       
@@ -78,18 +82,24 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build-${{ matrix.os }}-${{ matrix.dotnet-version }}
-          
+
       - name: Expand Build Tar
         run:  tar -xvf build-${{ matrix.os }}-${{ matrix.dotnet-version }}.tar.gz
         
+      - name: Check what files we have
+        run: ls -la
+
       - name: Start Application
-        run: echo "TODO - start app"
+        run: |
+          cp build/start-server.sh .
+          cp build/stop-server.sh .
+          start-server.sh
         
       - name: Run Acceptance Tests
         run: echo "TODO - run acceptance tests"
         
       - name: Stop Application
-        run: echo "TODO - stop app"
+        run: stop-server.sh
           
           
   package:
