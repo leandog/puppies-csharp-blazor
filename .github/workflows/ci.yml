@@ -109,8 +109,6 @@ jobs:
         
       - name: Run Acceptance Tests
         run: |
-          python3 -m venv .venv
-          source .venv/bin/activate
           pip install -r requirements.txt
           playwright install
           echo "# Acceptance Test Results" >> $GITHUB_STEP_SUMMARY
