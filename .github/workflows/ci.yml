@@ -107,6 +107,7 @@ jobs:
           echo "# Acceptance Test Results" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "```" >> $GITHUB_STEP_SUMMARY
+          echo "Some plain text here..." >> $GITHUB_STEP_SUMMARY
           BASE_URL="http://localhost:5000" behave -f plain
           echo "```" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
