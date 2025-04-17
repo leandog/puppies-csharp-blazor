@@ -99,7 +99,12 @@ jobs:
           ./start-puppies.sh
         
       - name: Run Acceptance Tests
-        run: BASE_URL="http://localhost:5000" behave
+        run: |
+          python3 -m venv .venv
+          source .venv/bin/activate
+          pip install -r requirements.txt
+          playwright install
+          BASE_URL="http://localhost:5000" behave
         
       - name: Report on Acceptance Tests
         run: echo "TODO - report on acceptance tests"
