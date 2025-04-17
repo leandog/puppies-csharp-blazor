@@ -140,10 +140,6 @@ jobs:
         with:
           name: build-${{ matrix.os }}-${{ matrix.dotnet-version }}
           
-      - name: Get Timestamp
-        id: date
-        run: echo "name=timestamp::$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_OUTPUT
-        
       - name: Publish Draft Release
         uses: ncipollo/release-action@v1
         with:
