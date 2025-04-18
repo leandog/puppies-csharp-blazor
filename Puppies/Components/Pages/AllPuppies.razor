@@ -19,19 +19,15 @@ else
         <thead>
         <tr>
             <th>Date</th>
-            <th>Temp. (C)</th>
-            <th>Temp. (F)</th>
-            <th>Summary</th>
+            <th>Favorite Weather</th>
         </tr>
         </thead>
         <tbody>
-        @foreach (var forecast in puppies)
+        @foreach (var puppy in puppies)
         {
             <tr>
-                <td>@forecast.Date.ToShortDateString()</td>
-                <td>@forecast.TemperatureC</td>
-                <td>@forecast.TemperatureF</td>
-                <td>@forecast.Summary</td>
+                <td>@puppy.BirthDate.ToShortDateString()</td>
+                <td>@puppy.FavoriteWeather</td>
             </tr>
         }
         </tbody>
@@ -43,25 +39,19 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        // Simulate asynchronous loading to demonstrate streaming rendering
-        await Task.Delay(500);
-
         var startDate = DateOnly.FromDateTime(DateTime.Now);
         var summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
         puppies = Enumerable.Range(1, 5).Select(index => new PuppyList
         {
-            Date = startDate.AddDays(index),
-            TemperatureC = Random.Shared.Next(-20, 55),
-            Summary = summaries[Random.Shared.Next(summaries.Length)]
+            BirthDate = startDate.AddDays(index),
+            FavoriteWeather = summaries[Random.Shared.Next(summaries.Length)]
         }).ToArray();
     }
 
     private class PuppyList
     {
-        public DateOnly Date { get; set; }
-        public int TemperatureC { get; set; }
-        public string? Summary { get; set; }
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+        public DateOnly BirthDate { get; set; }
+        public string? FavoriteWeather { get; set; }
     }
 
 }

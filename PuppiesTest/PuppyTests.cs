@@ -1,3 +1,5 @@
+using Puppies;
+
 namespace PuppiesTest;
 
 public class Tests
@@ -11,5 +13,29 @@ public class Tests
     public void Test1()
     {
         Assert.Pass();
+    }
+
+    [Test]
+    public void CreatePuppy()
+    {
+        var butch = new Puppy("Butch");
+        Assert.AreEqual(butch.GetType(), typeof(Puppy));
+    }
+    
+    [Ignore("asdf")]
+    [Test]
+    public void CreatePuppyList()
+    {
+        // var puppyList = new PuppyList();
+        // Assert.AreEqual(0, puppyList.totalPuppies());
+    }
+
+    [Ignore("NYI")]
+    [Test]
+    public void AddPuppyToList()
+    {
+        var butch = new Puppy("Butch");
+        // PuppyList
+
     }
 }
