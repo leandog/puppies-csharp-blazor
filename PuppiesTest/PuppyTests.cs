@@ -19,7 +19,7 @@ public class Tests
     public void CreatePuppy()
     {
         var butch = new Puppy("Butch");
-        Assert.AreEqual(butch.GetType(), typeof(Puppy));
+        Assert.That(typeof(Puppy), Is.EqualTo(butch.GetType()));
     }
     
     [Ignore("asdf")]
