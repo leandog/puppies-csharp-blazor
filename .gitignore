@@ -263,6 +263,9 @@ __pycache__/
 # Build directory used by dotnet publish
 build
 
+#Mac file
+.DS_Store
+
 # File that stores the process id (used by start-server.sh and stop-server.sh
 PUPPIES_PID
  
