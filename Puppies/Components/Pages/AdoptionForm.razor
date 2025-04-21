@@ -1,0 +1,38 @@
+@page "/adoption-form"
+@inject ILogger<AdoptionForm> Logger
+
+<h3>AdoptionForm</h3>
+<form method="post" @onsubmit="Submit" @formname="adoption-form">
+    <AntiforgeryToken/>
+    <div>
+        <label>
+            <span>Name:</span>
+            <span><InputText @bind-Value="Model!.Name"/></span>
+        </label>
+    </div>    
+    <div>
+        <label>
+            <span>Address:</span>
+            <span><InputText @bind-Value="Model!.Address"/></span>
+        </label>
+    </div>    
+    <div>
+        <label>
+            <span>Email:</span>
+            <span><InputText @bind-Value="Model!.Email"/></span>
+        </label>
+    </div>    
+    <div>
+        <button type="submit">Place Order</button>
+    </div>
+</form>
+
+@code {
+    [SupplyParameterFromForm]
+    private PuppyOwner? Model { get; set; }
+
+    protected override void OnInitialized() => Model ??= new();
+
+    private void Submit() => Logger.LogInformation("Name = {Name}", Model?.Name);
+
+}
