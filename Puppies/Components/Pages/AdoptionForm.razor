@@ -29,20 +29,24 @@
         </label>
     </div>
     <div>
-        <InputSelect TValue="string" @bind-Value="Model!.PayType">
-            <option>PayPal</option>
-            <option>Credit</option>
-            <option>Cheque</option>
-        </InputSelect>
+        <div class="col-sm-4">Payment Type:</div>
+        <div class="col-sm-8">
+            <InputSelect TValue="string" @bind-Value="Model!.PayType">
+                <option>PayPal</option>
+                <option>Credit</option>
+                <option>Cheque</option>
+            </InputSelect>
+        </div>
     </div>
     <div>
-        <button type="submit">Place Order</button>
+        @* <button Color="ButtonColor.Primary" type="submit">Place Order</button> *@
+        <Button Type="submit" Color="ButtonColor.Primary" To="#"> Place Order </Button>
     </div>
 </form>
 
 @code {
     [SupplyParameterFromForm] private PuppyOwner? Model { get; set; }
-    
+
     protected override void OnInitialized() => Model ??= new PuppyOwner();
 
     private void Submit() => Logger.LogInformation("Name = {Name}", Model?.Name);
