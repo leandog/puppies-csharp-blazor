@@ -1,37 +1,49 @@
 @page "/adoption-form"
 @inject ILogger<AdoptionForm> Logger
 
-<h3>AdoptionForm</h3>
+<h3>Puppy Adoption Form</h3>
 <form method="post" @onsubmit="Submit" @formname="adoption-form">
     <AntiforgeryToken/>
     <div>
         <label>
-            <span>Name:</span>
-            <span><InputText @bind-Value="Model!.Name"/></span>
+            <div class="col-sm-4">Name:</div>
+            <div class="col-sm-8">
+                <InputText @bind-Value="Model!.Name"/>
+            </div>
         </label>
-    </div>    
+    </div>
     <div>
         <label>
-            <span>Address:</span>
-            <span><InputText @bind-Value="Model!.Address"/></span>
+            <div class="col-sm-4">Address:</div>
+            <div class="col-sm-8">
+                <InputText @bind-Value="Model!.Address"/>
+            </div>
         </label>
-    </div>    
+    </div>
     <div>
         <label>
-            <span>Email:</span>
-            <span><InputText @bind-Value="Model!.Email"/></span>
+            <div class="col-sm-4">Email:</div>
+            <div class="col-sm-8">
+                <InputText @bind-Value="Model!.Email"/>
+            </div>
         </label>
-    </div>    
+    </div>
+    <div>
+        <InputSelect TValue="string" @bind-Value="Model!.PayType">
+            <option>PayPal</option>
+            <option>Credit</option>
+            <option>Cheque</option>
+        </InputSelect>
+    </div>
     <div>
         <button type="submit">Place Order</button>
     </div>
 </form>
 
 @code {
-    [SupplyParameterFromForm]
-    private PuppyOwner? Model { get; set; }
-
-    protected override void OnInitialized() => Model ??= new();
+    [SupplyParameterFromForm] private PuppyOwner? Model { get; set; }
+    
+    protected override void OnInitialized() => Model ??= new PuppyOwner();
 
     private void Submit() => Logger.LogInformation("Name = {Name}", Model?.Name);
 
