@@ -1,45 +1,51 @@
 @page "/adoption-form"
-@inject ILogger<AdoptionForm> Logger
+
 
 <h3>Puppy Adoption Form</h3>
-<form method="post" @onsubmit="Submit" @formname="adoption-form">
-    <AntiforgeryToken/>
-    <div>
-        <label>
-            <div class="col-sm-4">Name:</div>
-            <div class="col-sm-8">
-                <InputText @bind-Value="Model!.Name"/>
-            </div>
-        </label>
+<EditForm method="post" Model="typeof(PuppyOwner)" OnInvalidSubmit="HandleInvalidSubmit" OnValidSubmit="HandleValidSubmit" FormName="adoption-form">
+    <DataAnnotationsValidator/>
+    <ValidationSummary class="text-danger"/>
+    <div class="form-group mb-3">
+        <label for="Name" class="form-label">Name:</label>
+        <InputText id="Name" @bind-Value="_puppyOwner.Name" class="form-control"/>
+        <ValidationMessage For="@(() => _puppyOwner.Name)"/>
     </div>
-    <div>
-        <label>
-            <div class="col-sm-4">Address:</div>
-            <div class="col-sm-8">
-                <InputText @bind-Value="Model!.Address"/>
-            </div>
-        </label>
+    <div class="form-group mb-3">
+        <label for="Email" class="form-label">Email:</label>
+        <InputText id="Email" @bind-Value="_puppyOwner.Email" class="form-control"/>
+        <ValidationMessage For="@(() => _puppyOwner.Email)"/>
     </div>
-    <div>
-        <label>
-            <div class="col-sm-4">Email:</div>
-            <div class="col-sm-8">
-                <InputText @bind-Value="Model!.Email"/>
-            </div>
-        </label>
+    <div class="form-group mb-3">
+        <label for="PayType" class="form-label">Pay Type:</label>
+        <InputSelect id="PayType" @bind-Value="_puppyOwner.PayType" class="form-control">
+            <option value="PayPal">PayPal</option>
+            <option value="Cash">Cash</option>
+            <option value="Cheque">Cheque</option>
+        </InputSelect>
+        <ValidationMessage For="@(() => _puppyOwner.PayType)"/>
     </div>
-    <div>
-        <div class="col-sm-4">Payment Type:</div>
-        <div class="col-sm-8">
-            <InputSelect TValue="string" @bind-Value="Model!.PayType">
-                <option>PayPal</option>
-                <option>Credit</option>
-                <option>Cheque</option>
-            </InputSelect>
-        </div>
+    <div class="form-group">
+        <button class="btn btn-primary" type="submit" @onclick="HandleValidSubmit">Place Order</button>
     </div>
-    <div>
-        @* <button Color="ButtonColor.Primary" type="submit">Place Order</button> *@
-        <Button Type="submit" Color="ButtonColor.Primary" To="#"> Place Order </Button>
-    </div>
-</form>
+</EditForm>
+
+@if (_isSubmitted)
+{
+    <p class="text-success mt-3 h3">Adoption Process Started!</p>
+}
+
+@code {
+    private PuppyOwner _puppyOwner = new();
+    private bool _isSubmitted;
+
+    private void HandleValidSubmit()
+    {
+        _isSubmitted = true;
+    }
+    
+    private void HandleInvalidSubmit()
+    {
+        // statusClass = "alert-danger";
+        // message = "Show a meaningful error message.";
+    }
+}
